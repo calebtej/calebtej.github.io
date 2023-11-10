@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Box List App with Functionality</title>
+    <style>
+      .item-box {
+        border: 1px solid #000;
+        padding: 10px;
+        margin-top: 5px;
+        width: 200px; /* You can adjust the width as needed */
+        height: 50px; /* You can adjust the height as needed */
+        background-color: #f0f0f0; /* Light grey background */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Arial, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>My Box List</h2>
+
+    <!-- Container for the boxes -->
+    <div id="myList"></div>
+
+    <!-- A paragraph to display the number of items -->
+    <p id="itemCount">Number of items: 0</p>
+
+    <!-- A button to add a new item -->
+    <button onclick="addItem()">Add Box</button>
+
+    <script>
+      function removeItem() {
+        // TODO: to remove an item from a parent element
+        // element.removeChild(childElement)
+      }
+
+      // Function to add a new item as a box to the list
+      function addItem() {
+        console.log("In Add ITem");
+        var list = document.getElementById("myList");
+
+        // Create a new div element with class 'item-box'
+        var newItem = document.createElement("div");
+        newItem.className = "item-box";
+        newItem.textContent = "Item " + (list.children.length + 1); // For example purposes, add a text
+        // Append the new item to the list
+        list.appendChild(newItem);
+        // Update the item count
+        updateCount();
+      }
+
+      // Function to update the count of items
+      function updateCount() {
+        var itemCount = document.getElementById("myList").children.length;
+        document.getElementById("itemCount").textContent =
+          "Number of items: " + itemCount;
+      }
+
+      // Initial call to update count on page load
+      updateCount();
+    </script>
+  </body>
+</html>
