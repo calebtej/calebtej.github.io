@@ -1,37 +1,37 @@
 body{
-    background-color: whitesmoke;
-    font-family: Times New Roman, Times, serif;
-    margin-left: 330px;
-    padding-left: 20px;
-    color: #708090;
+  background-color: whitesmoke;
+  font-family: Times New Roman, Times, serif;
+  margin-left: 330px;
+  padding-left: 20px;
+  color: #708090;
 }
 .static-tab {
-  color: black;
-  padding: 20px;
-  padding-top: 10px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 300px;
-  height: 100%;
-  background-color:grey;
-  font-size: 15px;
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
+color: black;
+padding: 20px;
+padding-top: 10px;
+position: fixed;
+top: 0;
+left: 0;
+width: 300px;
+height: 100%;
+background-color:grey;
+font-size: 15px;
+display: flex;
+flex-direction: column;
+overflow-y: auto;
 }
 .static-tab img {
-  max-width: 100%;
-  border-radius: 100px;
-  margin: 0 auto;
-  width: 175px;
+max-width: 100%;
+border-radius: 100px;
+margin: 0 auto;
+width: 175px;
 }
 header{
-    text-align: center;
-    font-size: large;
-    font-weight: bold;
-    font-size: 40px;
-    margin: 4px;
+  text-align: center;
+  font-size: large;
+  font-weight: bold;
+  font-size: 40px;
+  margin: 4px;
 }
 h1{
 text-align: left ;
@@ -39,25 +39,26 @@ font-size: 35px;
 }
 h2{
 color: black; 
+
 }
 
 
 
-  
+
 .column-left {
 
-  order: 1; /* Position this column first (left) */
-  margin: 10px; /* Adjust this value to add space between columns */
- 
-  font-size: 17px;
+order: 1; /* Position this column first (left) */
+margin: 10px; /* Adjust this value to add space between columns */
+
+font-size: 17px;
 }
 
 .column-right {
 
-  order: 2; /* Position this column second (right) */
-  margin: 10px; /* Adjust this value to add space between columns */
+order: 2; /* Position this column second (right) */
+margin: 10px; /* Adjust this value to add space between columns */
 
-  font-size: 17px;
+font-size: 17px;
 }
 
 .contact img {
@@ -68,14 +69,14 @@ margin-top: 10px;
 margin-right:  5px ;
 }
 .mail img {
-  font-size: 17px;
-  max-width: 7%;
-  float: left; 
-  margin-bottom: 30px;
-  margin-right:  5px ;
+font-size: 17px;
+max-width: 7%;
+float: left; 
+margin-bottom: 30px;
+margin-right:  5px ;
 }
 .begin{
-  text-align: center;
+text-align: center;
 }
 .first{
 font-size: 32px;
@@ -83,10 +84,14 @@ background-color:grey ;
 padding: 20px;
 }
 .divider {
-  border-top: 1px solid #708090; 
-  margin: 20px 0;
+border-top: 1px  solid #708090;
+margin: 20px 0;
 }
 .divider1 {
-  border-top: 1px solid black; 
-  margin: 20px 0;
+border-top: 1px solid black; 
+margin: 20px 0;
+}
+#darkModeButton{
+border-radius: 10px;
+width: 100px; 
 }

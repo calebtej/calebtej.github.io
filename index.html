@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>cloudfare test run</title>
+<title>cloudfare resume</title>
 <link rel = "stylesheet" href ="style.css"> 
 </head> 
 <style>
 </style>
 <body>
-    <div class="static-tab">
+    <div class="static-tab" id= "leftTab">
+        <button id="darkModeButton">Dark Mode</button>
         <img src="images/IMG_3033 2.jpeg" alt="centered">
         <h1 class="begin">Caleb Tejada</h1>
-        <div class="divider1"></div>
+        <div class="divider1" id="topDivider"></div>
         <h1>Contact Information</h1>
         <div class="contact">
-    <img src= "images/icons8-phone-50.png"alt= "phone">
+    <img id="phoneImage" src= "images/icons8-phone-50.png"alt= "phone">
     <p><strong>Cell</strong> <a href="tel: (562)-739-8232">562-739-8232</a> <br> </p>  
         </div>
         <div class="mail">
             <img src="images/basic_mail.png"alt="email">
         <strong>email:</strong> <a href="mailto:calebtejada86@gmail.com"> calebtejada86@gmail.com </a> <br>
         </div>
-        <div class="divider1"></div>
-        <h2>Career Objective</h2>
+        <div class="divider1" id= "dividerTab"></div>
+        <h2 id="tabText" >Career Objective</h2>
         <p> Hard-working student with knowledge of buyer awareness, credit operations, and distribution management. <br>Aiming to leverage my abilities to successfully fill the vacancy on your team. <br>Frequently praised for creative thinking by my peers, I can be relied upon to help your team achieve its goals.
     <header>
         </div>
@@ -31,8 +32,25 @@
         <div class="column-left">
         <div>
         <p></p>
-        <div class="sus">
-            <h2 class="first"> Work Experience </h2>
+      
+       <div class="sus" id="myBanner">
+            <h2 id="bannerTitle" class="first"> Work Experience </h2>
+          
+        </div>
+            <h2 class= "section">CPP Housing; Buisness Services Student Leader</h2>
+            <p>September 2023 - Present<br>
+            <strong>Position: Buisness Services Student Leader(BSSL)</strong><br>
+            Housing Services; California state Polytechnic University Pomona
+            </p>
+            <p>
+                Monitored student performance during events and provided feedback as needed.<br>
+                Utilized problem-solving abilities to troubleshoot issues that arose during the event.<br>
+                Ensured compliance with all applicable laws, regulations, policies, and procedures.<br>
+                Organized and facilitated weekly meetings with team members to discuss goals, tasks, and timelines.<br>
+                Demonstrated excellent communication and interpersonal skills while interacting with students, faculty, staff, and sponsors.<br>
+                Adapted quickly to changing environments while remaining focused on goals.<br>
+            </p>
+
             <h2 class = "section">Del Taco; Team Member</h2>
         <p>February 2022 - August 2023 <br>
             <strong>Position: Front of House Team Member </strong> <br>
@@ -57,12 +75,14 @@
             <p>January 2023 - March 2023<br>
              <strong>Engineer Designer</strong> <br>
                 Mesa-Csulb - Long Beach, CA <br>
-                Analyzed product designs for manufacturability, cost optimization and performance requirements.<br>
-                Conducted design reviews to ensure compliance with established standards and customer specifications.<br>
-                Performed stress analysis on parts using FEA tools such as ANSYS or ABAQUS.<br>
-                Generated technical drawings, assembly instructions and bill of materials.<br>
-                Troubleshooted existing products in order to identify potential design improvements.<br>
-                Produced detailed documentation related to product designs, including test plans and reports.
+                Completion; regional 1st place.
+                Tested parts in a lab environment to ensure they meet performance criteria.<br>
+                Conducted research into the latest technologies and materials to incorporate into designs.<br>
+                Conducted testing and analysis of product designs to ensure accuracy and functionality.<br>
+                Spearheaded design projects from concept to completion, ensuring successful completion within budget and timeline.<br>
+                Collaborated with other engineers to develop innovative solutions for challenging problems.<br>
+                Analyzed test data from prototype builds, identified areas of improvement, and implemented changes accordingly.<br>
+                Collaborated with other engineering and design departments to ensure projects met safety, quality, and performance standards.<br>
             </p>
         <div> 
             <div class="divider"></div>
@@ -92,12 +112,5 @@
     </div>
         </div>
       </div>
-
-    
-    
-        
-      
-
-
+<script src="index.js"></script>
 </body>
-</html>
