@@ -32,7 +32,11 @@
     <button onclick="addItem()">Add Box</button>
 
     <script>
-      function removeItem() {
+      function removeItem(element) {
+        console.log("In Remove Item")
+        var list = document.getElementById("myList");
+        list.removeChild(element.parentNode);
+        updateCount();
         // TODO: to remove an item from a parent element
         // element.removeChild(childElement)
       }
@@ -46,6 +50,14 @@
         var newItem = document.createElement("div");
         newItem.className = "item-box";
         newItem.textContent = "Item " + (list.children.length + 1); // For example purposes, add a text
+        
+        var removeButton = document.createElement("button");
+        removeButton.textContent = "Remove";
+        removeButton.onclick = function () {
+        removeItem(this); //?//
+          
+        };
+        newItem.appendChild(removeButton);
         // Append the new item to the list
         list.appendChild(newItem);
         // Update the item count
@@ -64,3 +76,6 @@
     </script>
   </body>
 </html>
+<!-- //make a remove button for boxes 
+-remove last item from list from my list div 
+-the removeItem should remove the last item in the list from the myList div -->
