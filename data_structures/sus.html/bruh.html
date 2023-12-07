@@ -6,6 +6,7 @@ class Human {
   age;
   likedMovies = [];
   dislikedMovies= [];
+  likedMovieIds= []; 
   
   constructor(name, age) {
     this.name = name;
@@ -27,7 +28,7 @@ class Human {
         console.log(movieName, "not in list")
     }
   }
-  addDislikedMovie(){
+  addDislikedMovie(movieName){
     console.log("ADDING DISLIKED MOVIE", movieName)
     this.dislikedMovies.push(movieName);
   }
@@ -39,18 +40,28 @@ class Human {
         console.log(movieName,"DISLIKED")
     } else{
         console.log(movieName, "not in list")
-  }
-}
-}
+    }
+    }
+    addLikedMovieId(likedMovieId){
+        this.likedMovieIds.push(likedMovieId);
+    }
+    sayHello(){
+        console.log("hello from ", this.name)
+    }
+    humanAge(){
+        console.log("my age is", this.age)
+    }
+    }
 var anthony = new Human("anthony", 26);
 anthony.addMovie("oppenheimer");
 anthony.addMovie("Barbie");
 anthony.addMovie("Shawshank");
 anthony.addMovie("Training Day");
 console.log(anthony);
-
 anthony.removeMovie("Barbie");
-console.log(anthony);
+anthony.addLikedMovieId(1); 
+anthony.addLikedMovieId(2); 
+console.log(anthony.likedMovieIds);
 
 </script>
 </html>
