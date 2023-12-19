@@ -30,12 +30,26 @@
       this.pupils.push(student);
     }
 
-    assignGrade(name, grade) {
-      // TODO: write this code
+    assignGrade(name, grade) { 
+        const index = this.pupils.findIndex(student => student.name === name); 
+        if (index!= -1) {
+        let student = this.pupils[index]
+        student.grade = grade; 
+        console.log(`${name} has been assigned a grade of ${grade}.`); 
+    } else {
+        console.log(`${name} is not enrolled in this course.`);
+    }
     }
 
-    removePupil(name) {
-      // TODO write this code
+    removePupil(name) { //remove student name 
+     const index = this.pupils.findIndex(student => student.name === name);
+  if (index !== -1) {
+    this.pupils.splice(index, 1); //removechildconcept
+    console.log(`${name} has been removed from the course.`);
+  } else {
+    console.log(`${name} is not enrolled in this course.`);
+  }
+
     }
 
     listPupils() {
