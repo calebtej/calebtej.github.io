@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<script>
+  class Student {
+    id = 0;
+    name = "";
+    year = 0;
+    grade = 0;
+
+    constructor(name, year) {
+      this.id = Math.random();
+      this.name = name;
+      this.year = year;
+    }
+  }
+
+  class Course {
+    name = "";
+    syllabus = "";
+    lessons = [];
+    pupils = [];
+
+    constructor(name, syllabus, lessons) {
+      this.name = name;
+      this.syllabus = syllabus;
+      this.lessons = lessons;
+    }
+
+    addPupil(name, year) {
+      let student = new Student(name, year);
+      this.pupils.push(student);
+    }
+
+    assignGrade(name, grade) {
+      // TODO: write this code
+    }
+
+    removePupil(name) {
+      // TODO write this code
+    }
+
+    listPupils() {
+      for (let p of this.pupils) {
+        console.log(p);
+      }
+    }
+
+    listLessons() {
+      for (let l of this.lessons) {
+        console.log(l);
+      }
+    }
+  }
+
+  let calculus = new Course("calculus", "Do your homework", [
+    "Limits",
+    "chain-rule",
+    "intergration",
+  ]);
+
+  let inputOption;
+  while (inputOption != "exit") {
+    inputOption = prompt(
+      "Please enter your option\n[1] - Add Student\n[2] - List Students\n[3] - Add grade\n[4] - Remove student"
+    );
+    if (inputOption == "1") {
+      let studentName = prompt("Enter Student Name:");
+      let year = prompt("Enter Student Year:");
+      calculus.addPupil(studentName, year);
+    } else if (inputOption == "2") {
+      calculus.listPupils();
+    } else if (inputOption == "3") {
+      let studentName = prompt("Enter Student Name");
+      let studentGrade = prompt("Enter Student Grade:");
+      calculus.assignGrade(studentName, studentGrade);
+    } else if (inputOption == "4") {
+      let studentName = prompt("Enter Student Name");
+      calculus.removePupil(studentName);
+    } else {
+      console.log("Please input valid option");
+    }
+  }
+  console.log("finished program");
+</script>
