@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <script>
-  let courses = [];
   class Submission {
     homework;
     student;
@@ -60,11 +59,21 @@
       let student = new Student(name, year);
       this.pupils.push(student);
     }
+    assignGrade(name, grade) { 
+        const index = this.student.findIndex(student => student.name === name); 
+        if (index!= -1) {
+        let student = this.student[index]
+        student.grade = grade; 
+        console.log(`${name} has been assigned a grade of ${grade}.`); 
+    } else {
+        console.log(`${name} is not enrolled in this course.`);
+    }
+    }
 
     removePupilToCLass(name) { //remove student name 
      const index = this.pupils.findIndex(student => student.name === name);
     if (index !== -1) {
-      this.pupils.splice(index, 1); //removechildconcept
+      this.student.splice(index, 1); //removechildconcept
     console.log(`${name} has been removed from the course.`);
     } else {
     console.log(`${name} is not enrolled in this course.`);
@@ -83,7 +92,7 @@
     }
 
     addSubmissionToCLass(studentName, assignmentName) {
-      // find student
+     
       let studentIndex = this.students.findIndex(
         (student) => student.name == studentName
       );
@@ -93,7 +102,7 @@
       }
       let student = this.students[studentIndex];
 
-      // find assignment
+      
       let assignmentIndex = this.assignments.findIndex(
         (assignment) => assignment.assignmentName == assignmentName
       );
@@ -102,11 +111,7 @@
         return;
       }
       let assignment = this.assignments[assignmentIndex];
-
-      // create the submission
       let submission = new Submission(assignment, student);
-
-      // add to submissions
       this.submissions.push(submission);
     }
 
@@ -121,14 +126,22 @@
         console.log(a);
       }
     }
+    listPupilsToCLass() {
+      for (let p of this.students) {
+        console.log(p);
+      }
   }
+}
+  let courses = [];
   let coursesList = [];
-  listCourses(){
+  function listCourses(){
     console.log("List of Courses:");
   for (let c of coursesList) {
     console.log(c);
       }
   }
+    
+  
   let calculus = new Course("calculus", "Do your homework", [
     "Limits",
     "chain-rule",
@@ -138,12 +151,12 @@
   let inputOption;
   while (inputOption != "exit") {
     inputOption = prompt(
-      "Please enter your option\n[1] - Add Student\n[2] - List Students\n[3] - Add grade\n[4] - Remove student\n[5] - Add Class\n[6] - Add Assignment\n[7] - Add Submission\n[8] - Exit\n"
+      "Please enter your option\n[1] - Add Student\n[2] - List Students\n[3] - Add grade\n[4] - Remove student\n[5] - Add Class\n[6] -list Class\n[7]- Add Assignment\n[8] - Add Submission\n[9] - Exit\n"
     );
     if (inputOption == "1") {
       let studentName = prompt("Enter Student Name:");
       let year = prompt("Enter Student Year:");
-      calculus.addPupil(studentName, year);
+      calculus.addStudentToClass(studentName, year);
     } else if (inputOption == "2") {
       calculus.listPupilsToCLass();
     } else if (inputOption == "3") {
@@ -152,15 +165,15 @@
       calculus.assignGrade(studentName, studentGrade);
     } else if (inputOption == "4") {
       let studentName = prompt("Enter Student Name");
-      calculus.removePupil(studentName);
+      calculus.removePupilToCLass(studentName);
      } else if (inputOption =="5"){
-      let name = prompt("Enter the name of the new class:");
-      courses.push(newCourse)
-      console.log(`Class "${name}" has been added.`);
+      let className = prompt("Enter the name of the new class:");
+      Course.addClass(className);
     } else if (inputOption === "6") {
-    // edit this 
+      listCourses();
     } else if (inputOption === "7") {
-      // edit this
+      let assignmentName = prompt("Enter Assignment Name")
+      calculus.addAssignmentToCLass(assignmentName);
     } else if (inputOption === "exit") {
       console.log("Exiting program.");
     } else {
