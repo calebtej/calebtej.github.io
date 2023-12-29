@@ -43,42 +43,38 @@
     assignments = [];
     submissions = [];
 
-    static addClass() {
-    let student = new Student(name, year);
-    const newCourse = new Course(name, []);
-    courses.push(newCourse);
-    console.log(`Class "${name}" has been added.`);
-    }
     constructor(name, syllabus, lessons) {
       this.name = name;
       this.syllabus = syllabus;
       this.lessons = lessons;
     }
-    
+
     addPupilToCLass(name, year) {
       let student = new Student(name, year);
       this.pupils.push(student);
     }
     assignGradeToStudent(name, grade) {
-        const studentIndex = this.students.findIndex(student => student.name === name);
-        if (studentIndex !== -1) {
-            const student = this.students[studentIndex];
-            student.grade = grade;
-            console.log(`${name} has been assigned a grade of ${grade}.`);
-        } else {
-            console.log(`${name} is not enrolled in this course.`);
-        }
+      const studentIndex = this.students.findIndex(
+        (student) => student.name === name
+      );
+      if (studentIndex !== -1) {
+        const student = this.students[studentIndex];
+        student.grade = grade;
+        console.log(`${name} has been assigned a grade of ${grade}.`);
+      } else {
+        console.log(`${name} is not enrolled in this course.`);
+      }
     }
 
     removePupilToCLass(name) {
-    const index = this.students.findIndex(student => student.name === name);
-    if (index !== -1) {
+      const index = this.students.findIndex((student) => student.name === name);
+      if (index !== -1) {
         this.students.splice(index, 1);
         console.log(`${name} has been removed from the course.`);
-    } else {
+      } else {
         console.log(`${name} is not enrolled in this course.`);
+      }
     }
-}
 
     addStudentToClass(name, year) {
       let student = new Student(name, year);
@@ -86,13 +82,15 @@
     }
 
     addAssignmentToClass(assignmentName) {
-    let newAssignment = new Assignment(assignmentName);
-    this.assignments.push(newAssignment);
-    console.log(`Assignment "${assignmentName}" has been added to the course.`);
-  }
-  addSubmissionToCLass(studentName, assignmentName) {
-  console.log("Students in this course:", this.students);
-  console.log("Student name being added for submission:", studentName);
+      let newAssignment = new Assignment(assignmentName);
+      this.assignments.push(newAssignment);
+      console.log(
+        `Assignment "${assignmentName}" has been added to the course.`
+      );
+    }
+    addSubmissionToCLass(studentName, assignmentName) {
+      console.log("Students in this course:", this.students);
+      console.log("Student name being added for submission:", studentName);
       let studentIndex = this.students.findIndex(
         (student) => student.name == studentName
       );
@@ -102,7 +100,6 @@
       }
       let student = this.students[studentIndex];
 
-      
       let assignmentIndex = this.assignments.findIndex(
         (assignment) => assignment.assignmentName == assignmentName
       );
@@ -130,37 +127,20 @@
       for (let p of this.students) {
         console.log(p);
       }
+    }
   }
-}
   let courses = [];
-  let coursesList = [];
   function listCourses() {
     console.log("List of Courses:");
     for (let c of courses) {
-        console.log(c.name);
+      console.log(c.name);
     }
-}
+  }
   function searchCourseByName(courseName) {
-  const foundCourse = courses.find(course => course.name === courseName);
-  return foundCourse ? foundCourse : null;
-}
-
-    
-  
-  let calculus = new Course("calculus", "Do your homework", [
-    "Limits",
-    "chain-rule",
-    "intergration",
-  ]);
-
-  let inputOption;
-  let foundCourse = null; 
-  while (inputOption != "exit") {
-    inputOption = prompt(
-      "Please enter your option\n[1] - Add Student\n[2] - List Students\n[3] - Add grade\n[4] - Remove student\n[5] - Add Class\n[6] -list Class\n[7]- Add Assignment\n[8] - Add Submission\n[9] - Exit\n"
-    );
-    if (inputOption == "1") {
-      if (inputOption === "1") {
+    const foundCourse = courses.find((course) => course.name === courseName);
+    return foundCourse ? foundCourse : null;
+  }
+  function addStudentToCourse() {
     let studentName = prompt("Enter Student Name:");
     let year = prompt("Enter Student Year:");
     let className = prompt("Enter Class Name:");
@@ -171,55 +151,90 @@
     } else {
       console.log(`Class ${className} not found.`);
     }
-  } 
-} else if (inputOption === "2") {
-  let className = prompt("Enter Class Name:");
-  const foundCourse = searchCourseByName(className);
-  if (foundCourse) {
-    foundCourse.listPupilsToCLass();
-  } else {
-    console.log(`Class ${className} not found.`);
   }
+  function listStudentsInCourse() {
+    let className = prompt("Enter Class Name:");
+    const foundCourse = searchCourseByName(className);
+    if (foundCourse) {
+      foundCourse.listPupilsToCLass();
+    } else {
+      console.log(`Class ${className} not found.`);
+    }
+  }
+  function assignGradeToStudent() {
+    let studentName = prompt("Enter Student Name");
+    let studentGrade = prompt("Enter Student Grade:");
+    let className = prompt("Enter Class Name:");
+    const foundCourse = searchCourseByName(className);
+    foundCourse.assignGradeToStudent(studentName, studentGrade);
+  }
+  function removeStudentFromCourse() {
+    let studentName = prompt("Enter Student Name");
+    let className = prompt("Enter Class Name:");
+    const foundCourse = searchCourseByName(className);
+    foundCourse.removePupilToCLass(studentName);
+  }
+  function addCourse() {
+    let className = prompt("Enter the name of the new class:");
+    foundCourse = searchCourseByName(className);
+    if (!foundCourse) {
+      foundCourse = new Course(className, "", []);
+      courses.push(foundCourse);
+      console.log(`Class "${className}" has been added.`);
+    } else {
+      console.log(`Course ${className} already exists.`);
+    }
+  }
+  function addAssignmentToCourse() {
+    let assignmentName = prompt("Enter Assignment Name");
+    let className = prompt("Enter Class Name:");
+    const foundCourse = searchCourseByName(className);
+    if (foundCourse) {
+      foundCourse.addAssignmentToClass(assignmentName);
+    } else {
+      console.log("Course not found.");
+    }
+  }
+  function addSubmissionToCourse() {
+    let studentName = prompt("Enter Student Name");
+    let submissionName = prompt("Enter Assignment Name");
+    let className = prompt("Enter Class Name:");
+    const foundCourse = searchCourseByName(className);
+    if (foundCourse) {
+      foundCourse.addSubmissionToClass(studentName, submissionName);
+    } else {
+      console.log("Course not found.");
+    }
+  }
+
+  let inputOption;
+  let foundCourse = null;
+  while (inputOption != "exit") {
+    inputOption = prompt(
+      "Please enter your option\n[1] - Add Student\n[2] - List Students\n[3] - Add grade\n[4] - Remove student\n[5] - Add Class\n[6] -list Class\n[7]- Add Assignment\n[8] - Add Submission\n[9] - Exit\n"
+    );
+    if (inputOption == "1") {
+      addStudentToCourse();
+    } else if (inputOption === "2") {
+      listStudentsInCourse();
     } else if (inputOption == "3") {
-      let studentName = prompt("Enter Student Name");
-      let studentGrade = prompt("Enter Student Grade:");
-      foundCourse.assignGradeToStudent(studentName, studentGrade);
+      assignGradeToStudent();
     } else if (inputOption == "4") {
-      let studentName = prompt("Enter Student Name");
-      foundCourse.removePupilToCLass(studentName);
-     } else if (inputOption =="5"){
-      let className = prompt("Enter the name of the new class:");
-  foundCourse = searchCourseByName(className);
-  if (!foundCourse) {
-    foundCourse = new Course(className, "", []);
-    courses.push(foundCourse);
-    console.log(`Class "${className}" has been added.`);
-  } else {
-    console.log(`Course ${className} already exists.`);
-  }
+      removeStudentFromCourse();
+    } else if (inputOption == "5") {
+      addCourse();
     } else if (inputOption === "6") {
       listCourses();
     } else if (inputOption === "7") {
-      let assignmentName = prompt("Enter Assignment Name");
-  if (foundCourse) {
-    foundCourse.addAssignmentToClass(assignmentName);
-  } else {
-    console.log("Course not found.");
-  }
-  } else if (inputOption === "8") {
-  let studentName = prompt("Enter Student Name");
-  let assignmentName = prompt("Enter Assignment Name");
-  if (foundCourse) {
-    foundCourse.addSubmissionToClass(studentName, assignmentName);
-  } else {
-    console.log("Course not found.");
-  }
+      addAssignmentToCourse();
+    } else if (inputOption === "8") {
+      addSubmissionToCourse();
     } else if (inputOption === "exit") {
       console.log("Exiting program.");
     } else {
       console.log("Please input a valid option or 'exit' to quit.");
     }
-
   }
+  // 12.28 HW //prettier/ repeated code (make function)
   console.log("finished program");
 </script>
