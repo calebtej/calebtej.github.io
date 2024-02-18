@@ -51,8 +51,9 @@
 
     addPupilToCLass(name, year) {
       let student = new Student(name, year);
-      this.pupils.push(student);
+      this.students.push(student);
     }
+
     assignGradeToStudent(name, grade) {
       const studentIndex = this.students.findIndex(
         (student) => student.name === name
@@ -88,6 +89,7 @@
         `Assignment "${assignmentName}" has been added to the course.`
       );
     }
+
     addSubmissionToCLass(studentName, assignmentName) {
       console.log("Students in this course:", this.students);
       console.log("Student name being added for submission:", studentName);
@@ -123,118 +125,225 @@
         console.log(a);
       }
     }
+
     listPupilsToCLass() {
       for (let p of this.students) {
         console.log(p);
       }
     }
   }
-  let courses = [];
-  function listCourses() {
-    console.log("List of Courses:");
-    for (let c of courses) {
-      console.log(c.name);
+
+  class Administrator {
+    username;
+    password;
+    courses = [];
+
+    constructor(username, password) {
+      this.username = username;
+      this.password = password;
     }
-  }
-  function searchCourseByName(courseName) {
-    const foundCourse = courses.find((course) => course.name === courseName);
-    return foundCourse ? foundCourse : null;
-  }
-  function addStudentToCourse() {
-    let studentName = prompt("Enter Student Name:");
-    let year = prompt("Enter Student Year:");
-    let className = prompt("Enter Class Name:");
-    const foundCourse = searchCourseByName(className);
-    if (foundCourse) {
-      foundCourse.addStudentToClass(studentName, year);
-      console.log(`Student ${studentName} added to class ${className}.`);
-    } else {
-      console.log(`Class ${className} not found.`);
+
+    listCourses() {
+      console.log("List of Courses:");
+      for (let c of this.courses) {
+        console.log(c.name);
+      }
     }
-  }
-  function listStudentsInCourse() {
-    let className = prompt("Enter Class Name:");
-    const foundCourse = searchCourseByName(className);
-    if (foundCourse) {
-      foundCourse.listPupilsToCLass();
-    } else {
-      console.log(`Class ${className} not found.`);
+
+    // Search course by name within the administrator's courses
+    searchCourseByName(courseName) {
+      const foundCourse = this.courses.find(
+        (course) => course.name === courseName
+      );
+      return foundCourse ? foundCourse : null;
     }
-  }
-  function assignGradeToStudent() {
-    let studentName = prompt("Enter Student Name");
-    let studentGrade = prompt("Enter Student Grade:");
-    let className = prompt("Enter Class Name:");
-    const foundCourse = searchCourseByName(className);
-    foundCourse.assignGradeToStudent(studentName, studentGrade);
-  }
-  function removeStudentFromCourse() {
-    let studentName = prompt("Enter Student Name");
-    let className = prompt("Enter Class Name:");
-    const foundCourse = searchCourseByName(className);
-    foundCourse.removePupilToCLass(studentName);
-  }
-  function addCourse() {
-    let className = prompt("Enter the name of the new class:");
-    foundCourse = searchCourseByName(className);
-    if (!foundCourse) {
-      foundCourse = new Course(className, "", []);
-      courses.push(foundCourse);
-      console.log(`Class "${className}" has been added.`);
-    } else {
-      console.log(`Course ${className} already exists.`);
+
+    addStudentToCourse() {
+      let studentName = prompt("Enter Student Name:");
+      let year = prompt("Enter Student Year:");
+      let className = prompt("Enter Class Name:");
+      const foundCourse = this.searchCourseByName(className);
+      if (foundCourse) {
+        foundCourse.addStudentToClass(studentName, year);
+        console.log(`Student ${studentName} added to class ${className}.`);
+      } else {
+        console.log(`Class ${className} not found.`);
+      }
     }
-  }
-  function addAssignmentToCourse() {
-    let assignmentName = prompt("Enter Assignment Name");
-    let className = prompt("Enter Class Name:");
-    const foundCourse = searchCourseByName(className);
-    if (foundCourse) {
-      foundCourse.addAssignmentToClass(assignmentName);
-    } else {
-      console.log("Course not found.");
+
+    listStudentsInCourse() {
+      let className = prompt("Enter Class Name:");
+      const foundCourse = this.searchCourseByName(className);
+      if (foundCourse) {
+        foundCourse.listPupilsToCLass();
+      } else {
+        console.log(`Class ${className} not found.`);
+      }
     }
-  }
-  function addSubmissionToCourse() {
-    let studentName = prompt("Enter Student Name");
-    let submissionName = prompt("Enter Assignment Name");
-    let className = prompt("Enter Class Name:");
-    const foundCourse = searchCourseByName(className);
-    if (foundCourse) {
-      foundCourse.addSubmissionToClass(studentName, submissionName);
-    } else {
-      console.log("Course not found.");
+
+    assignGradeToStudent() {
+      let studentName = prompt("Enter Student Name");
+      let studentGrade = prompt("Enter Student Grade:");
+      let className = prompt("Enter Class Name:");
+      const foundCourse = this.searchCourseByName(className);
+      foundCourse.assignGradeToStudent(studentName, studentGrade);
+    }
+
+    removeStudentFromCourse() {
+      let studentName = prompt("Enter Student Name");
+      let className = prompt("Enter Class Name:");
+      const foundCourse = this.searchCourseByName(className);
+      foundCourse.removePupilToCLass(studentName);
+    }
+
+    addCourse() {
+      let className = prompt("Enter the name of the new class:");
+      let foundCourse = this.searchCourseByName(className);
+      if (!foundCourse) {
+        foundCourse = new Course(className, "", []);
+        this.courses.push(foundCourse);
+        console.log(`Class "${className}" has been added.`);
+      } else {
+        console.log(`Course ${className} already exists.`);
+      }
+    }
+
+    addAssignmentToCourse() {
+      let assignmentName = prompt("Enter Assignment Name");
+      let className = prompt("Enter Class Name:");
+      const foundCourse = this.searchCourseByName(className);
+      if (foundCourse) {
+        foundCourse.addAssignmentToClass(assignmentName);
+      } else {
+        console.log("Course not found.");
+      }
+    }
+
+    addSubmissionToCourse() {
+      let studentName = prompt("Enter Student Name");
+      let submissionName = prompt("Enter Assignment Name");
+      let className = prompt("Enter Class Name:");
+      const foundCourse = this.searchCourseByName(className);
+      if (foundCourse) {
+        foundCourse.addSubmissionToCLass(studentName, submissionName);
+      } else {
+        console.log("Course not found.");
+      }
     }
   }
 
+  let administrators = [];
+  let adminOption;
+  let currentAdmin = null;
   let inputOption;
-  let foundCourse = null;
-  while (inputOption != "exit") {
-    inputOption = prompt(
-      "Please enter your option\n[1] - Add Student\n[2] - List Students\n[3] - Add grade\n[4] - Remove student\n[5] - Add Class\n[6] -list Class\n[7]- Add Assignment\n[8] - Add Submission\n[9] - Exit\n"
+
+  // Function to create a new Administrator
+  function createAdministrator(username, password) {
+    let admin = new Administrator(username, password);
+    administrators.push(admin);
+    return admin;
+  }
+
+  // Function to perform administrator login
+  function adminLogin(username, password) {
+    return administrators.find(
+      (admin) => admin.username === username && admin.password === password
     );
-    if (inputOption == "1") {
-      addStudentToCourse();
-    } else if (inputOption === "2") {
-      listStudentsInCourse();
-    } else if (inputOption == "3") {
-      assignGradeToStudent();
-    } else if (inputOption == "4") {
-      removeStudentFromCourse();
-    } else if (inputOption == "5") {
-      addCourse();
-    } else if (inputOption === "6") {
-      listCourses();
-    } else if (inputOption === "7") {
-      addAssignmentToCourse();
-    } else if (inputOption === "8") {
-      addSubmissionToCourse();
-    } else if (inputOption === "exit") {
-      console.log("Exiting program.");
+  }
+
+  // Function to prompt login and redirect to admin options
+  function adminLoginPrompt() {
+    let username = prompt("Enter your username:");
+    let password = prompt("Enter your password:");
+    currentAdmin = adminLogin(username, password);
+    if (currentAdmin) {
+      console.log("Admin login successful.");
+      adminOptionsLoop();
     } else {
-      console.log("Please input a valid option or 'exit' to quit.");
+      console.log("Admin login failed.");
     }
   }
-  // 12.28 HW //prettier/ repeated code (make function)
-  console.log("finished program");
+
+  // Function to handle admin options loop
+  function adminOptionsLoop() {
+    while (inputOption !== "9" && currentAdmin) {
+      inputOption = prompt(
+        "Please enter your option\n[1] - Add Student\n[2] - List Students\n[3] - Add Grade\n[4] - Remove Student\n[5] - Add Class\n[6] - List Class\n[7] - Add Assignment\n[8] - Add Submission\n[9] - Logout\n"
+      );
+
+      if (inputOption === "1") {
+        currentAdmin.addStudentToCourse();
+      } else if (inputOption === "2") {
+        currentAdmin.listStudentsInCourse();
+      } else if (inputOption === "3") {
+        currentAdmin.assignGradeToStudent();
+      } else if (inputOption === "4") {
+        currentAdmin.removeStudentFromCourse();
+      } else if (inputOption === "5") {
+        currentAdmin.addCourse();
+      } else if (inputOption === "6") {
+        currentAdmin.listCourses();
+      } else if (inputOption === "7") {
+        currentAdmin.addAssignmentToCourse();
+      } else if (inputOption === "8") {
+        currentAdmin.addSubmissionToCourse();
+      } else if (inputOption === "9") {
+        console.log("Logging out.");
+
+        // Allow creating a new account
+        adminOption = prompt(
+          "Do you want to create a new account or log in again? (new/login/exit):"
+        ).toLowerCase();
+        if (adminOption === "new") {
+          let username = prompt("Enter new username:");
+          let password = prompt("Enter new password:");
+          currentAdmin = new Administrator(username, password);
+          administrators.push(currentAdmin);
+          console.log(`Administrator ${username} created successfully.`);
+          console.log(`Administrator ${username} created successfully.`);
+
+          // Prompt to log in
+          let signInOption = prompt(
+            "Do you want to log in now? (yes/no):"
+          ).toLowerCase();
+          if (signInOption === "yes") {
+            adminOption = "2"; // Set adminOption to 2 for logging in
+          }
+        } else if (adminOption === "login") {
+          adminLoginPrompt();
+        } else {
+          console.log("Exiting program.");
+        }
+      } else {
+        console.log("Please input a valid option or '9' to logout.");
+      }
+    }
+  }
+
+  // Main loop for admin options
+  while (adminOption !== "3") {
+    adminOption = prompt(
+      "Please select an option\n[1] - Create new Administrator\n[2] - Log in as Administrator\n[3] - Exit\n"
+    );
+
+    if (adminOption === "1") {
+      let username = prompt("Enter new username:");
+      let password = prompt("Enter new password:");
+      currentAdmin = createAdministrator(username, password);
+      console.log(`Administrator ${username} created successfully.`);
+
+      let signInOption = prompt(
+        "Do you want to log in now? (yes/no):"
+      ).toLowerCase();
+      if (signInOption === "yes") {
+        adminLoginPrompt();
+      }
+    } else if (adminOption === "2") {
+      adminLoginPrompt();
+    } else if (adminOption !== "3") {
+      console.log("Invalid option");
+    }
+  }
+
+  console.log("Finished program");
 </script>
