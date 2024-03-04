@@ -149,7 +149,6 @@
         console.log(c.name);
       }
     }
-
     // Search course by name within the administrator's courses
     searchCourseByName(courseName) {
       const foundCourse = this.courses.find(
@@ -198,14 +197,23 @@
 
     addCourse() {
       let className = prompt("Enter the name of the new class:");
-      let foundCourse = this.searchCourseByName(className);
-      if (!foundCourse) {
-        foundCourse = new Course(className, "", []);
-        this.courses.push(foundCourse);
-        console.log(`Class "${className}" has been added.`);
-      } else {
-        console.log(`Course ${className} already exists.`);
+
+      // Check if the course name is empty
+      if (!className) {
+        console.log("Course name cannot be empty.");
+        return;
       }
+
+      // Check if the course name already exists
+      if (this.searchCourseByName(className)) {
+        console.log(`Course "${className}" already exists.`);
+        return;
+      }
+
+      // Create a new course
+      let foundCourse = new Course(className, "", []);
+      this.courses.push(foundCourse);
+      console.log(`Class "${className}" has been added.`);
     }
 
     addAssignmentToCourse() {
@@ -237,11 +245,26 @@
   let currentAdmin = null;
   let inputOption;
 
-  // Function to create a new Administrator
   function createAdministrator(username, password) {
-    let admin = new Administrator(username, password);
-    administrators.push(admin);
-    return admin;
+    // Check if the username-password combination already exists
+    if (isUsernamePasswordCombinationExists(username, password)) {
+      console.log(
+        "An administrator with the same username and password already exists."
+      );
+      return null;
+    } else {
+      let admin = new Administrator(username, password);
+      administrators.push(admin);
+      console.log(`Administrator ${username} created successfully.`);
+      return admin;
+    }
+  }
+
+  // Function to check if a username-password combination already exists
+  function isUsernamePasswordCombinationExists(username, password) {
+    return administrators.some(
+      (admin) => admin.username === username && admin.password === password
+    );
   }
 
   // Function to perform administrator login
@@ -251,7 +274,6 @@
     );
   }
 
-  // Function to prompt login and redirect to admin options
   function adminLoginPrompt() {
     let username = prompt("Enter your username:");
     let password = prompt("Enter your password:");
@@ -264,7 +286,6 @@
     }
   }
 
-  // Function to handle admin options loop
   function adminOptionsLoop() {
     while (inputOption !== "9" && currentAdmin) {
       inputOption = prompt(
@@ -289,33 +310,8 @@
         currentAdmin.addSubmissionToCourse();
       } else if (inputOption === "9") {
         console.log("Logging out.");
-
-        // Allow creating a new account
-        adminOption = prompt(
-          "Do you want to create a new account or log in again? (new/login/exit):"
-        ).toLowerCase();
-        if (adminOption === "new") {
-          let username = prompt("Enter new username:");
-          let password = prompt("Enter new password:");
-          currentAdmin = new Administrator(username, password);
-          administrators.push(currentAdmin);
-          console.log(`Administrator ${username} created successfully.`);
-          console.log(`Administrator ${username} created successfully.`);
-
-          // Prompt to log in
-          let signInOption = prompt(
-            "Do you want to log in now? (yes/no):"
-          ).toLowerCase();
-          if (signInOption === "yes") {
-            adminOption = "2"; // Set adminOption to 2 for logging in
-          }
-        } else if (adminOption === "login") {
-          adminLoginPrompt();
-        } else {
-          console.log("Exiting program.");
-        }
-      } else {
-        console.log("Please input a valid option or '9' to logout.");
+        inputOption = null;
+        return;
       }
     }
   }
@@ -330,17 +326,9 @@
       let username = prompt("Enter new username:");
       let password = prompt("Enter new password:");
       currentAdmin = createAdministrator(username, password);
-      console.log(`Administrator ${username} created successfully.`);
-
-      let signInOption = prompt(
-        "Do you want to log in now? (yes/no):"
-      ).toLowerCase();
-      if (signInOption === "yes") {
-        adminLoginPrompt();
-      }
     } else if (adminOption === "2") {
       adminLoginPrompt();
-    } else if (adminOption !== "3") {
+    } else {
       console.log("Invalid option");
     }
   }
